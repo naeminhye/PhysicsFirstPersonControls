@@ -1,0 +1,4 @@
+# Do not remove this line, otherwise mod_rewrite rules will stop working
+RewriteBase /
+
+Header set Access-Control-Allow-Headers "origin, x-requested-with, content-type"
