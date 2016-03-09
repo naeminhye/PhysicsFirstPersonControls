@@ -112,13 +112,6 @@
         camera.position.set(0, 67, 0);
         camera.lookAt(scene.position);
         
-        /*load textures and materilas*/
-//        directionalLight = new THREE.DirectionalLight( 0xaaaaaa, 0.1 );
-//        directionalLight.position.set( -1000, 700, -1000 );
-//        directionalLight.castShadow = true;
-//        scene.add( directionalLight );
-        
-		
 		var light = new THREE.AmbientLight( 0x404040 ); // soft white light
 		scene.add( light );
 
@@ -145,20 +138,11 @@
         controls = new THREE.PhysicsFirstPersonControls(player);
         controls.setAudioContext(audioContext).startOn(container, false);
 		
-		
-		
 		// CUBE CAMERA
 
 		cubeCamera = new THREE.CubeCamera( 1, 100000, 512 );
-//		cubeCamera.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
-
 		scene.add( cubeCamera );
-//
-//		cubeCamera.renderTarget.wrapT =
-//		cubeCamera.renderTarget.wrapS = THREE.RepeatWraping
-		
 		cubeCamera.renderTarget.texture.format = THREE.RGBFormat;
-        //cubeCamera.renderTarget.stencilBuffer =  false
 		
 		// MATERIALS
 		
@@ -184,19 +168,15 @@
 			color: 0x00ffff,
 			specular:0xff0000,
 			shininess: 1,
-			//normalMap: texture1,
 			bumpMap: texture1,
-			//specularMap : texture2,
+			specularMap : texture2,
 			depthWrite: false,
 			envMap: cubeCamera.renderTarget,
 			combine: THREE.MixOperation,
 			reflectivity: 1,
 			metal: true
 		} );
-//        mat1.envMap.texture.magFilter = THREE.NearestFilter;
-//		mat1.envMap.texture.minFilter = THREE.NearestFilter;
-
-		console.log(mat1)
+		
 	
         // Box
         box = new Physijs.BoxMesh(
@@ -205,28 +185,18 @@
             0
         );
         
-		
-		
         box.geometry.name = "foo";
         
         box.position.y = -10;
         scene.add( box );
         
-        loader = new THREE.SEA3D( {
-
-            //autoPlay : true, // Auto play animations
-            //container : scene // Container to add models
-
-        } );
+        loader = new THREE.SEA3D();
 
         loader.onComplete = function( e ) {
-            console.log(loader.meshes[0]);
             doorParams.anim = loader.meshes[0];
             
             
-            //doorParams.anim.geometry.center();
-            
-            
+           
             var box = new THREE.BoxGeometry(
                 doorParams.anim.geometry.boundingBox.max.x - doorParams.anim.geometry.boundingBox.min.x,
                 doorParams.anim.geometry.boundingBox.max.y - doorParams.anim.geometry.boundingBox.min.y,
@@ -255,11 +225,6 @@
 
         loader.load( './models/door.sea' );
         
-        //door.moveTo( 0, 50, 110);
-        
-        ///HELPERS
-		console.log(cubeCamera.updateCubeMap)
-		
         scene.simulate(); // run physics
         requestAnimationFrame( render );
     };
@@ -288,7 +253,6 @@
 		cubeCamera.position.copy( {x:player.position.x, y:-67 - player.position.y  , z:player.position.z} );
 
 		// render scene
-
 		cubeCamera.updateCubeMap( renderer, scene );
 		renderer.render( scene, camera); // render the scene
         
