@@ -3,13 +3,10 @@ Physics first person controls for Physijs and Threejs with sound
 </br></br>
 See project results <a href="http://speculees.github.io/PhysicsFirstPersonControls">here</a>.
 </br></br>
-This project module is also part of 
+This project module is also a part of 
 <a href="http://dev.tridedesign.com">this demo</a>.
 <br>
 
-This project module is a part of 
-<a href="dev.tridedesign.com">this demo</a>
-</br>
 Look: mouse </br>
 Movment: W S A D || Up Down Left Right </br>
 Jump: Space </br>
