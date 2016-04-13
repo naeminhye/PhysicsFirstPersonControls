@@ -173,18 +173,16 @@
 			depthWrite: false,
 			envMap: cubeCamera.renderTarget,
 			combine: THREE.MixOperation,
-			reflectivity: 1,
-			metal: true
+			reflectivity: 1
 		} );
-		
-	
+			
         // Box
         box = new Physijs.BoxMesh(
             new THREE.CubeGeometry( 1500, 1, 1500 ),
             Physijs.createMaterial( mat1, 4, 0.5 ),
             0
         );
-        
+		
         box.geometry.name = "foo";
         
         box.position.y = -10;
@@ -251,9 +249,12 @@
         THREE.AnimationHandler.update( delta );
 		
 		cubeCamera.position.copy( {x:player.position.x, y:-67 - player.position.y  , z:player.position.z} );
-
+		
 		// render scene
+		box.visible = false;
 		cubeCamera.updateCubeMap( renderer, scene );
+		box.visible = true;
+		
 		renderer.render( scene, camera); // render the scene
         
 		
